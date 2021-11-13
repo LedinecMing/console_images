@@ -11,3 +11,7 @@ If it does not work maybe you should change color_function to color_it48 or colo
 Console color schemes:  
 [216 colors](https://robotmoon.com/256-colors/)  
 [Full RGB](https://gist.github.com/XVilka/8346728)
+# Color circles
+![Full RGB](/examples/color-circle.png)
+![216](/examples/color-circle1.png)
+![48](/examples/color-circle2.png)
