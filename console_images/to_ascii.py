@@ -11,7 +11,8 @@ from palette import color_it_full
 __all__: typing.Sequence = ["generate_image",
                             "print_image",
                             "print_images",
-                            "show_gif"]
+                            "show_gif",
+                            "TextImage"]
 
 ascii_table: SymbolTable = SymbolTable([' ', '.', ':', "'",
                                         ',', '-', ';', '_',
