@@ -2,14 +2,19 @@ import typing
 
 import colorama
 
+import random
+
 colorama.init()
 
 __all__: typing.List[str] = \
     [
         "color_it_full",
         "color_it216",
-        "color_it48"
+        "color_it48",
+        "DIZERING_RANGE"
     ]
+
+DIZERING_RANGE: int = 3
 
 pal: typing.List[int] = [0, 95, 135, 175, 215, 255]
 
@@ -89,7 +94,8 @@ def get_pal(color: typing.Tuple[int, int, int]) -> typing.List[int]:
     return col_data
 
 
-def color_it48(color: typing.Tuple[int, int, int]) -> str:
+def color_it48(color: typing.Tuple[int, int, int],
+               dizering: bool = False) -> str:
     """48 colors"""
     if all([col > 240 for col in color]) \
             and color[0] * 3 - 10 < sum(color) < color[0] * 3 + 10:
@@ -128,15 +134,34 @@ def color_it48(color: typing.Tuple[int, int, int]) -> str:
     return ""
 
 
-def color_it216(color: typing.Tuple[int, int, int]) -> str:
+def color_it216(color: typing.Tuple[int, int, int],
+                dizering: bool = False) -> str:
     """216 colors"""
     color_data: typing.List[int] = get_pal(color)
     color_num: int = sum([6 ** (len(color_data) - index - 1) * data
                           for index, data in enumerate(color_data)])
+    dizering_number: int = random.randint(0, int(dizering) * DIZERING_RANGE*2)
+
     return f"\033[38;05;" \
-           f"{16 + color_num }m"
+           f"{16 + color_num};48;05" \
+           f"{16 + color_num - dizering_number}m"
 
 
-def color_it_full(color: typing.Tuple[int, int, int]) -> str:
+def color_it_full(color: typing.Tuple[int, int, int],
+                  dizering: bool = True) -> str:
     """Full rgb"""
-    return f"\033[38;02;{color[0]};{color[1]};{color[2]}m"
+    color_addings: typing.List = [0, 0, 0]
+    if dizering:
+        color_addings = [random.randint(0,
+                                        DIZERING_RANGE * 2) - DIZERING_RANGE,
+                         random.randint(0,
+                                        DIZERING_RANGE * 2) - DIZERING_RANGE,
+                         random.randint(0,
+                                        DIZERING_RANGE * 2) - DIZERING_RANGE]
+        for index, adding in enumerate(color_addings):
+            if color[index] - adding < 0:
+                color_addings[index] = 0
+    return f"\033[48;02;{color[0] - color_addings[0]};" \
+           f"{color[1] - color_addings[1]};" \
+           f"{color[2] - color_addings[2]};38;02;" \
+           f"{color[0]};{color[1]};{color[2]}m"
