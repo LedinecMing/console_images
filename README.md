@@ -1,5 +1,6 @@
 # console_images
 Console images in 48 colors, 216 colors and full rgb
+# [PYPI PROJECT](https://pypi.org/project/console-images/)
 # Full RGB
 ![Full rgb](https://raw.githubusercontent.com/LedinecMing/console_images/main/examples/full_rgb.png)  
 # 216 colors
