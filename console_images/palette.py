@@ -170,11 +170,8 @@ def color_it_full(color: typing.Tuple[int, int, int],
     color_addings: typing.List = [0, 0, 0]
     if dizering:
         color_addings = [random.randint(0,
-                                        DIZERING_RANGE * 2) - DIZERING_RANGE,
-                         random.randint(0,
-                                        DIZERING_RANGE * 2) - DIZERING_RANGE,
-                         random.randint(0,
-                                        DIZERING_RANGE * 2) - DIZERING_RANGE]
+                                        DIZERING_RANGE * 2) - DIZERING_RANGE
+                         for _ in range(3)]
         for index, adding in enumerate(color_addings):
             if color[index] - adding < 0:
                 color_addings[index] = 0
