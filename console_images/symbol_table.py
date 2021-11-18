@@ -23,12 +23,14 @@ from dataclasses import dataclass, field
 @dataclass
 class SymbolTable:
     table: typing.MutableSequence[str]
-    symbol_identification: typing.Dict[int, str] = field(default_factory=lambda: {})
+    symbol_identification: typing.Dict[int, str] = \
+        field(default_factory=lambda: {})
 
     def get_symbol(self, bright: int):
         """Get symbol of table by bright"""
         if bright not in self.symbol_identification.keys():
-            self.symbol_identification[bright] = self.table[round(bright / 256 * (len(self.table) - 1))]
+            self.symbol_identification[bright] = \
+                self.table[round(bright / 256 * (len(self.table) - 1))]
         return self.symbol_identification[bright]
 
     def __getitem__(self, item: int):
